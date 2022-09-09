@@ -838,10 +838,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c485598d8cbb9734184f786833fbaf67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  go: {fileID: 591751241}
-  text: {fileID: 303993307}
-  score: 0
-  nb_upgrade: 0
+  Text: {fileID: 303993307}
+  Score: 0
+  NbUpgrade: 0
 --- !u!58 &591751245
 CircleCollider2D:
   m_ObjectHideFlags: 0
