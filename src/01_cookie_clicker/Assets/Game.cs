@@ -12,7 +12,6 @@ public class Game : MonoBehaviour
     public int Score = 0;
     public int NbUpgrade = 0;
 
-    private bool Hover = false;
     private TMP_Text Tmp;
     private Button Btn;
     private int UpgradeCost = 5;
@@ -25,25 +24,16 @@ public class Game : MonoBehaviour
 
         DisableOrEnableButton();
 
-        InvokeRepeating("AddRecurentScore", 5.0f, 3.0f);
+        InvokeRepeating("AddRecurrentScore", 5.0f, 3.0f);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if(Input.GetMouseButtonDown(0) && Hover) 
+    // Update is called once per frame while button is hovered
+    private void OnMouseOver() {
+        if(Input.GetMouseButtonDown(0)) 
             UpdateScore(1);
     }
 
-    void OnMouseEnter(){
-        Hover = true;
-    }
-
-    void OnMouseExit(){
-        Hover = false;
-    }
-
-    void AddRecurentScore() {
+    void AddRecurrentScore() {
         UpdateScore(NbUpgrade);
     }
 
