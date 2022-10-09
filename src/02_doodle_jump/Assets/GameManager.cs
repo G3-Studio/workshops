@@ -21,10 +21,4 @@ public class GameManager : MonoBehaviour
             Instantiate(platformPrefab, spawnPosition, Quaternion.identity);
         }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
