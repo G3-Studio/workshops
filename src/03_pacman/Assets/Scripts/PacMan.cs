@@ -8,6 +8,7 @@ public class PacMan : MonoBehaviour
     public int[] direction { get; private set; } = { 1, 0 };
     public Rigidbody2D rb;
 
+    public int score = 0;
 
     private void Start()
     {
@@ -36,5 +37,10 @@ public class PacMan : MonoBehaviour
             transform.position = new Vector3((float) Math.Round(position.x + 0.5) - 0.5f, position.y);
             transform.rotation = Quaternion.Euler(0, 0, direction[1] * 90);
         }
+    }
+
+    public void addScore(int score)
+    {
+        this.score += score;
     }
 }
