@@ -11,7 +11,6 @@ public class Food : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("Player")) {
-            Vector3 playerPos = col.transform.position;
             PacMan playerScript = col.GetComponent<PacMan>();
             
             var tilePos = GetComponent<Tilemap>().WorldToCell(col.gameObject.transform.position);
