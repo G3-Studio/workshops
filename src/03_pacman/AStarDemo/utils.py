@@ -1,3 +1,5 @@
+import random
+
 import pygame
 from Node import Node
 
@@ -38,15 +40,19 @@ class Vector2(tuple):
 node_pattern = [
     [0, 0, 0, 0, 0, 0, 0, 0, 1, 3],
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
-    [1, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-    [1, 0, 0, 0, 1, 1, 1, 1, 0, 0],
-    [1, 0, 0, 0, 1, 0, 0, 1, 1, 1],
-    [1, 0, 0, 1, 1, 1, 1, 1, 0, 1],
-    [1, 0, 0, 1, 0, 0, 0, 0, 0, 1],
-    [1, 1, 0, 1, 1, 1, 0, 0, 0, 1],
+    [1, 0, 0, 1, 0, 0, 0, 0, 0, 0],
+    [1, 0, 1, 1, 0, 0, 1, 1, 0, 0],
+    [1, 0, 1, 0, 0, 0, 0, 1, 1, 1],
+    [1, 0, 1, 1, 1, 1, 1, 1, 0, 1],
+    [1, 0, 0, 0, 0, 1, 0, 0, 0, 1],
+    [1, 1, 0, 0, 0, 1, 0, 0, 0, 1],
     [0, 1, 0, 0, 0, 1, 1, 1, 0, 1],
-    [2, 1, 1, 1, 1, 1, 0, 0, 1, 1],
+    [2, 1, 1, 1, 1, 1, 0, 1, 1, 1],
 ]
+
+#node_pattern = [[int(random.random() > 0.3) for j in range(20)] for i in range(20)]
+#node_pattern[0][-1] = 3
+#node_pattern[-1][0] = 2
 
 
 nodes = List2D(10, 10)
@@ -75,13 +81,15 @@ def get_end():
 
 
 screen = None
+font = None
 
 
 def display_step(nodes, opened_nodes, closed_nodes, current):
-    global screen
+    global screen, font
     if screen is None:
         pygame.init()
         screen = pygame.display.set_mode((500, 500))
+        font = pygame.font.SysFont("Arial", 16)
     for node in nodes:
         node_surf = pygame.Surface((50, 50))
         color = (255, 0, 0)
@@ -93,7 +101,22 @@ def display_step(nodes, opened_nodes, closed_nodes, current):
             color = (0, 0, 255)
         if node is current:
             color = (255, 255, 0)
-        pygame.draw.rect(node_surf, color, pygame.Rect(0, 0, 50, 50))
+        node_surf.fill(color)
+        if node in opened_nodes or node in closed_nodes:
+            node_surf.blit(font.render(str(node.cost), True, (0, 0, 0)), (5, 5))
+            distance_to_dest_surf = font.render(str(node.distance_to_destination), True, (0, 0, 0))
+            node_surf.blit(distance_to_dest_surf, (45 - distance_to_dest_surf.get_width(), 5))
+            heuristic_surf = font.render(str(node.heuristic_cost), True, (0, 0, 0))
+            node_surf.blit(heuristic_surf, ((50 - heuristic_surf.get_width()) / 2, 25))
+        if node.comes_from.x != -1:
+            if node.pos.x > node.comes_from.x:
+                pygame.draw.polygon(node_surf, (0, 0, 0), [(5, 20), (5, 30), (10, 25)])
+            elif node.pos.x < node.comes_from.x:
+                pygame.draw.polygon(node_surf, (0, 0, 0), [(45, 20), (45, 30), (40, 25)])
+            elif node.pos.y > node.comes_from.y:
+                pygame.draw.polygon(node_surf, (0, 0, 0), [(20, 5), (30, 5), (25, 10)])
+            else:
+                pygame.draw.polygon(node_surf, (0, 0, 0), [(20, 45), (30, 45), (25, 40)])
         screen.blit(node_surf, (node.pos.x * 50, node.pos.y * 50))
     pygame.display.flip()
     while True:
@@ -117,7 +140,17 @@ def display_and_quit(nodes, path):
             color = (0, 0, 0)
         if node in path:
             color = (0, 255, 255)
-        pygame.draw.rect(node_surf, color, pygame.Rect(0, 0, 50, 50))
+        node_surf.fill(color)
+        if node in path:
+            if node.comes_from.x != -1:
+                if node.pos.x > node.comes_from.x:
+                    pygame.draw.polygon(node_surf, (0, 0, 0), [(5, 20), (5, 30), (10, 25)])
+                elif node.pos.x < node.comes_from.x:
+                    pygame.draw.polygon(node_surf, (0, 0, 0), [(45, 20), (45, 30), (40, 25)])
+                elif node.pos.y > node.comes_from.y:
+                    pygame.draw.polygon(node_surf, (0, 0, 0), [(20, 5), (30, 5), (25, 10)])
+                else:
+                    pygame.draw.polygon(node_surf, (0, 0, 0), [(20, 45), (30, 45), (25, 40)])
         screen.blit(node_surf, (node.pos.x * 50, node.pos.y * 50))
     pygame.display.flip()
     while True:

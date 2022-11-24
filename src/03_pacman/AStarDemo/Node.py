@@ -1,4 +1,4 @@
-import Utils
+import utils
 
 
 class Node:
@@ -8,7 +8,7 @@ class Node:
         self.cost = 0
         self.distance_to_destination = 0
         self.heuristic_cost = 0
-        self.comes_from = Utils.Vector2((0, 0))
+        self.comes_from = utils.Vector2((-1, -1))
         self.is_wall = is_wall
 
     def __repr__(self):
