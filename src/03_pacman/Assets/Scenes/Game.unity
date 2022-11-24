@@ -12631,12 +12631,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  rb: {fileID: 0}
+  grid: {fileID: 1036255540}
+  walls: {fileID: 2088838746}
   enemy1: {fileID: 120309845}
   enemy2: {fileID: 539919856}
   enemy3: {fileID: 1791090768}
   enemy4: {fileID: 594106204}
-  food: {fileID: 2138172958}
   score: 0
 --- !u!212 &1129928005
 SpriteRenderer:
