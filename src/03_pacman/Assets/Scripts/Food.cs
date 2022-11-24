@@ -16,7 +16,7 @@ public class Food : MonoBehaviour
             var tilePos = GetComponent<Tilemap>().WorldToCell(col.gameObject.transform.position);
             GetComponent<Tilemap>().SetTile(tilePos, null);
 
-            playerScript.addScore(10);
+            playerScript.AddScore(10);
         }
     }
 
