@@ -1,5 +1,7 @@
 using System;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.Tilemaps;
 
 public class PacMan : MonoBehaviour
 {
@@ -8,7 +10,14 @@ public class PacMan : MonoBehaviour
     public int[] direction { get; private set; } = { 1, 0 };
     public Rigidbody2D rb;
 
+    public GameObject enemy1;
+    public GameObject enemy2;
+    public GameObject enemy3;
+    public GameObject enemy4;
+    public GameObject food;
+
     public int score = 0;
+    private Vector3Int previousPosition;
 
     private void Start()
     {
@@ -37,6 +46,18 @@ public class PacMan : MonoBehaviour
             // transform.position = new Vector3((float) Math.Round(position.x + 0.5) - 0.5f, position.y);
             transform.rotation = Quaternion.Euler(0, 0, direction[1] * 90);
         }
+        Vector3Int currentPosition = this.GetPositision();
+        if (previousPosition == null || previousPosition != currentPosition) {
+            enemy1.GetComponent<NavMeshAgent>().destination = transform.position;
+            enemy2.GetComponent<NavMeshAgent>().destination = transform.position;
+            enemy3.GetComponent<NavMeshAgent>().destination = transform.position;
+            enemy4.GetComponent<NavMeshAgent>().destination = transform.position;
+            this.previousPosition = currentPosition;
+        }
+    }
+
+    private Vector3Int GetPositision() {
+        return food.GetComponent<Tilemap>().WorldToCell(transform.position);
     }
 
     public void addScore(int score)
