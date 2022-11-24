@@ -24,7 +24,7 @@ public class Food : MonoBehaviour
             var tilePos = tilemap.WorldToCell(col.gameObject.transform.position);
             tilemap.SetTile(tilePos, null);
 
-            playerScript.addScore(10);
+            playerScript.AddScore(10);
         }
     }
 
