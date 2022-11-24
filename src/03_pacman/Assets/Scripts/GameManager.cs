@@ -18,8 +18,8 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(food.GetFoodCount() == 0) {
+        /*if(food.GetFoodCount() == 0) {
             UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
-        }
+        }*/
     }
 }

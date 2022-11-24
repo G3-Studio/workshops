@@ -33,10 +33,10 @@ public class PacMan : MonoBehaviour
         rb.velocity = new Vector2(speed * direction[0], speed * direction[1]);
 
         if (direction[0] != 0) {
-            transform.position = new Vector3(transform.position.x, grid.CellToWorld(GetPosition()).y + 0.5f);
+            transform.position = new Vector3(transform.position.x, grid.CellToWorld(GetPosition()).y + grid.cellSize.y / 2);
             transform.rotation = Quaternion.Euler(0, 0, (direction[0] - 1) * 90);
         } else {
-            transform.position = new Vector3(grid.CellToWorld(GetPosition()).x + 0.5f, transform.position.y);
+            transform.position = new Vector3(grid.CellToWorld(GetPosition()).x + grid.cellSize.x / 2, transform.position.y);
             transform.rotation = Quaternion.Euler(0, 0, direction[1] * 90);
         }
     }

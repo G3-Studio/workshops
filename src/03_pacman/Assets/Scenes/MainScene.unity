@@ -255,7 +255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dffb84c02df02115b63acdb1b44e862, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4.46
+  speed: 2.08
   pacman: {fileID: 1064548530}
   grid: {fileID: 1531885842}
 --- !u!50 &159325729
