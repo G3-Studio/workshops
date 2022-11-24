@@ -4,9 +4,16 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.SceneManagement;
 
 public class Food : MonoBehaviour
 {
+    Tilemap tilemap;
+
+    private void Start()
+    {
+        tilemap = GetComponent<Tilemap>();
+    }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
@@ -14,14 +21,16 @@ public class Food : MonoBehaviour
             Vector3 playerPos = col.transform.position;
             PacMan playerScript = col.GetComponent<PacMan>();
             
-            var tilePos = GetComponent<Tilemap>().WorldToCell(col.gameObject.transform.position);
-            GetComponent<Tilemap>().SetTile(tilePos, null);
+            var tilePos = tilemap.WorldToCell(col.gameObject.transform.position);
+            tilemap.SetTile(tilePos, null);
 
             playerScript.addScore(10);
         }
     }
 
-    public int GetFoodCount() {
-        return GetComponent<Tilemap>().GetUsedTilesCount();
+    void Update() {
+        if(tilemap.GetUsedTilesCount() == 0) {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 }
