@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class Enemy : MonoBehaviour
 {
@@ -12,7 +13,8 @@ public class Enemy : MonoBehaviour
         agent.updateUpAxis = false;
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
-        Debug.Log("T MORT");
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
