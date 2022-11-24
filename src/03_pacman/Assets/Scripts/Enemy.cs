@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private PacMan pacman;
     [SerializeField] private Grid grid;
 
-    private List<Vector3Int> path;
+    private List<Vector3Int> path = new List<Vector3Int>();
     private int[] direction = { 0, 0 };
     private Rigidbody2D rb;
 

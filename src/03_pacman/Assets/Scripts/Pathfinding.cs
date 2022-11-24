@@ -33,12 +33,9 @@ public class Pathfinding : MonoBehaviour
             if (current.pos.x == end.x && current.pos.y == end.y) {
                 List<Vector3Int> path = new List<Vector3Int>();
                 path.Add(current.pos);
-                Debug.Log("starting");
                 while (current.pos.x != start.x || current.pos.y != start.y) {
                     current = current.comesFrom;
                     path.Add(current.pos);
-                    Debug.Log("adding a new one !!" + current.pos + " qui est un mur ? " +
-                              (walls.GetTile(current.pos) != null));
                 }
                 // Reverse the path to have the start node first
                 path.Reverse();
