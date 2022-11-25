@@ -20,6 +20,7 @@ public class PacMan : MonoBehaviour
 
     public int score = 0;
     private Vector3Int previousPosition;
+    public float lastEnemyUpdate;
 
     private void Start()
     {
@@ -51,11 +52,12 @@ public class PacMan : MonoBehaviour
         }
 
         Vector3Int currentPosition = this.GetPosition();
-        if (previousPosition == null || previousPosition != currentPosition) {
+        if (previousPosition != currentPosition && Time.time - lastEnemyUpdate > 3) {
             enemy1.GetComponent<NavMeshAgent>().destination = transform.position;
             enemy2.GetComponent<NavMeshAgent>().destination = transform.position;
             enemy3.GetComponent<NavMeshAgent>().destination = transform.position;
             enemy4.GetComponent<NavMeshAgent>().destination = transform.position;
+            lastEnemyUpdate = Time.time;
             this.previousPosition = currentPosition;
         }
     }
