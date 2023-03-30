@@ -6,6 +6,7 @@ TagManager:
   tags:
   - TopBottom
   - Enemy
+  - BulletAlly
   layers:
   - Default
   - TransparentFX
